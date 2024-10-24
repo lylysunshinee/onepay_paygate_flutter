@@ -38,13 +38,14 @@ class OPPaymentEntity {
   String? customerId;
   late String returnUrl = "$urlSchemes://onepay/";
   String? codeRef;
+  String? LINK_PAYGATE;
 
   static const VERSION_PAYGATE = "2";
   static const COMMAND_PAYGATE = "pay";
   static const AGAIN_LINK = "https://localhost/again_link";
   static const TICKET_NO = "10.2.20.1";
-  static const LINK_PAYGATE = "https://mtf.onepay.vn/paygate/vpcpay.op";
-  // static const LINK_PAYGATE = "https://onepay.vn/paygate/vpcpay.op";
+  static const LINK_PAYGATE_DEV = "https://mtf.onepay.vn/paygate/vpcpay.op";
+  // static const LINK_PAYGATE_PROD = "https://onepay.vn/paygate/vpcpay.op";
   static const VPC_THEME = "general";
 
   OPPaymentEntity({
@@ -59,6 +60,7 @@ class OPPaymentEntity {
     this.customerEmail,
     this.customerId,
     this.codeRef,
+    this.LINK_PAYGATE = LINK_PAYGATE_DEV,
   });
 
   String createUrlPayment() {

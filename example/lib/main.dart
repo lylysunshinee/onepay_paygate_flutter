@@ -58,8 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // var ACCESS_CODE_PAYGATE = "22772CEF"; // Onepay send for merchant
     var ACCESS_CODE_PAYGATE = "6BEB2577"; // Onepay send for merchant
     var MERCHANT_PAYGATE = "TESTOPITEL"; //  Merchant register with onepay
-    var HASH_KEY = "6D0870CDE5F24F34F3915FB0045120BB"; // Onepay send for merchant
-    var URL_SCHEMES = "merchantappscheme"; // get CFBundleURLSchemes in Info.plist
+    var HASH_KEY =
+        "6D0870CDE5F24F34F3915FB0045120BB"; // Onepay send for merchant
+    var URL_SCHEMES =
+        "merchantappscheme"; // get CFBundleURLSchemes in Info.plist
+    var PAY_URL = 'https://mtf.onepay.vn/paygate/vpcpay.op';
     var entity = OPPaymentEntity(
         amount: double.parse(_amount),
         orderInformation: "$MERCHANT_PAYGATE test",
@@ -67,19 +70,38 @@ class _MyHomePageState extends State<MyHomePage> {
         accessCode: ACCESS_CODE_PAYGATE,
         merchant: MERCHANT_PAYGATE,
         hashKey: HASH_KEY,
-        urlSchemes: URL_SCHEMES);
-    OnePayPaygate.open(context: context, entity: entity,
-      onPayResult: (OPPaymentResult result) {
+        urlSchemes: URL_SCHEMES,
+        LINK_PAYGATE: PAY_URL);
+    OnePayPaygate.open(
+        context: context,
+        entity: entity,
+        onPayResult: (OPPaymentResult result) {
           print("result: ${result.toString()}");
           if (result.isSuccess) {
-            showDialog(context: context, builder: (context) => AlertDialog(title: const Text("Thông báo"), content: Text("Thanh toán thành công"),));
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      title: const Text("Thông báo"),
+                      content: Text("Thanh toán thành công"),
+                    ));
           } else {
-            showDialog(context: context, builder: (context) => AlertDialog(title: const Text("Thông báo"), content: Text(result.message ?? "Thanh toán không thành công"),));
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      title: const Text("Thông báo"),
+                      content:
+                          Text(result.message ?? "Thanh toán không thành công"),
+                    ));
           }
         },
-      onPayFail: (error) {
-        showDialog(context: context, builder: (context) => AlertDialog(title: const Text("Lỗi"), content: Text(error.errorCase.name),));
-      });
+        onPayFail: (error) {
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: const Text("Lỗi"),
+                    content: Text(error.errorCase.name),
+                  ));
+        });
   }
 
   @override
@@ -116,7 +138,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: TextFormField(
                 initialValue: _amount,
                 decoration: const InputDecoration(
@@ -130,7 +153,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: ElevatedButton(
                 child: const Text('Thanh toán'),
                 onPressed: _createPayment,

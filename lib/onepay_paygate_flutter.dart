@@ -39,8 +39,8 @@ class OPPaymentEntity {
   late String returnUrl = "$urlSchemes://onepay/";
   String? codeRef;
   String? LINK_PAYGATE;
-  String? vpc_CardList
-  String? vpc_theme
+  String? vpc_CardList;
+  String? vpc_theme;
 
   static const VERSION_PAYGATE = "2";
   static const COMMAND_PAYGATE = "pay";

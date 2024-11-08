@@ -64,7 +64,7 @@ class OPPaymentEntity {
     this.codeRef,
     this.LINK_PAYGATE = LINK_PAYGATE_DEV,
     this.vpc_CardList,
-    this.vpc_theme = VPC_THEME
+    this.vpc_theme
   });
 
   String createUrlPayment() {
@@ -88,8 +88,8 @@ class OPPaymentEntity {
       "vpc_TicketNo": ticketNo,
       "Title": title,
       "vpc_Currency": currency.name.toUpperCase(),
-      "vpc_Theme": vpc_theme,
-      "AgainLink": AGAIN_LINK
+     "vpc_Theme": vpc_theme != null ? vpc_theme! : VPC_THEME,
+      "AgainLink": AGAIN_LINK,
     };
     if (codeRef != null) {
       queries["vpc_MerchTxnRef"] = codeRef!;

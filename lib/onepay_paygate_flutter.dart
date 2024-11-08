@@ -39,6 +39,7 @@ class OPPaymentEntity {
   late String returnUrl = "$urlSchemes://onepay/";
   String? codeRef;
   String? LINK_PAYGATE;
+  String? vpc_CardList
 
   static const VERSION_PAYGATE = "2";
   static const COMMAND_PAYGATE = "pay";
@@ -61,6 +62,7 @@ class OPPaymentEntity {
     this.customerId,
     this.codeRef,
     this.LINK_PAYGATE = LINK_PAYGATE_DEV,
+    this.vpc_CardList,
   });
 
   String createUrlPayment() {
@@ -98,6 +100,9 @@ class OPPaymentEntity {
     }
     if (customerId != null) {
       queries["vpc_Customer_Id"] = customerId!;
+    }
+    if (vpc_CardList != null) {
+      queries["vpc_CardList"] = vpc_CardList!;
     }
     queries["vpc_SecureHash"] = secureHashQueries(queries, hashKey);
     var queryString =

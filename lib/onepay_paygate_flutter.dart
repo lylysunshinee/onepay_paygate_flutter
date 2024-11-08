@@ -40,6 +40,7 @@ class OPPaymentEntity {
   String? codeRef;
   String? LINK_PAYGATE;
   String? vpc_CardList
+  String? vpc_theme
 
   static const VERSION_PAYGATE = "2";
   static const COMMAND_PAYGATE = "pay";
@@ -63,6 +64,7 @@ class OPPaymentEntity {
     this.codeRef,
     this.LINK_PAYGATE = LINK_PAYGATE_DEV,
     this.vpc_CardList,
+    this.vpc_theme = VPC_THEME
   });
 
   String createUrlPayment() {
@@ -86,7 +88,7 @@ class OPPaymentEntity {
       "vpc_TicketNo": ticketNo,
       "Title": title,
       "vpc_Currency": currency.name.toUpperCase(),
-      "vpc_Theme": VPC_THEME,
+      "vpc_Theme": vpc_theme,
       "AgainLink": AGAIN_LINK
     };
     if (codeRef != null) {
